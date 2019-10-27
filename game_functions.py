@@ -106,4 +106,24 @@ def create_fleet(ai_settings, screen, ship, aliens):
 
 def update_aliens(aliens):
     """Uaktualnienie położenia wszystkich obcych we flocie."""
+
+def check_fleet_edges(ai_settings, aliens):
+    """Odpowiednia reakcja, gdy obcy dotrze do krawędzi ekranu."""
+    for alien in aliens.sprites():
+        if alien.check_edges():
+            change_fleet_direction(ai_settings, aliens)
+            break
+
+def change_fleet_direction(ai_settings, aliens):
+    """Przesunięcie całej floty w dół i zmiana kierunku, w którym się ona porusza."""
+    for alien in aliens.sprites():
+        alien.rect.y += ai_settings.fleet_drop_speed
+    ai_settings.fleet_direction *= -1
+
+def update_aliens(ai_settings, aliens):
+    """
+    Sprawdzenie, czy flota znajduje sie przy krawędzi ekranu, a następnie
+    uaktualnienie położenia wszystkich obcych we flocie.
+    """
+    check_fleet_edges(ai_settings, aliens)
     aliens.update()

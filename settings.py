@@ -16,4 +16,7 @@ class Settings():
         self.bullets_allowed = 3
         # Ustawienia dotyczące obcego.
         self.alien_speed_factor = 1
+        self.fleet_drop_speed = 10
+        # Wartość fleet_direction wznosząca 1 oznacza prawo, natomiast -1 oznacza lewo.
+        self.fleet_direction = 1
 
