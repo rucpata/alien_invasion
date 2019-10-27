@@ -20,7 +20,7 @@ def run_game():
     bullets = Group()
 
     # Utworzenie floty obcych.
-    gf.create_fleet(ai_settings, screen, aliens)
+    gf.create_fleet(ai_settings, screen, ship, aliens)
 
 
     # Rozpoczęcie pętli głównej gry
