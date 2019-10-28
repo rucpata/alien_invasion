@@ -133,19 +133,20 @@ def change_fleet_direction(ai_settings, aliens):
 
 def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
     """Reakcja na uderzenie obcego w statek."""
-    # Zmniejszenie wartości przechowywanej w ships_left.
-    stats.ships_left -= 1
+    if stats.ships_left > 0:
+        # Zmniejszenie wartości przechowywanej w ships_left.
+        stats.ships_left -= 1
 
-    # Usunięcoe zawartości list aloens i bullets.
-    aliens.empty()
-    bullets.empty()
+        # Usunięcoe zawartości list aloens i bullets.
+        aliens.empty()
+        bullets.empty()
 
-    #Utworzenie nowej floty i wyświetlenie statku.
-    create_fleet(ai_settings, screen, ship, aliens)
-    ship.center_ship()
+        #Utworzenie nowej floty i wyświetlenie statku.
+        create_fleet(ai_settings, screen, ship, aliens)
+        ship.center_ship()
 
-    # Pauza
-    sleep(0.5)
+        # Pauza
+        sleep(0.5)
 
 def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):
     """
