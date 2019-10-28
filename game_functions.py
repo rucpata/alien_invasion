@@ -69,10 +69,13 @@ def update_bullets(ai_settings, screen, ship, aliens, bullets):
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
 
-    # Sprawdzanie, czy którykolwiek pocisk trafił obcego.
-    # Jeżeli tak, usuwamy zarówno pocisk, jak i obcego.
-    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
+    check_bullet_alien_collisions(ai_settings, screen, ship, aliens,
+                                  bullets)
 
+def check_bullet_alien_collisions(ai_settings, screen, ship, aliens,
+                                  bullets):
+    """Reakcja na kolizję między pociakami i obcym"""
+    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
     if len(aliens) == 0:
         #Pozbycie się isnnijących pocisków i utworzenie nowej floty.
         bullets.empty()
