@@ -1,4 +1,5 @@
 import sys
+from time import sleep
 import pygame
 from bullet import Bullet
 from alien import Alien
@@ -75,6 +76,7 @@ def update_bullets(ai_settings, screen, ship, aliens, bullets):
 def check_bullet_alien_collisions(ai_settings, screen, ship, aliens,
                                   bullets):
     """Reakcja na kolizję między pociakami i obcym"""
+    #Usunięcie wszystkich pocisków i obcych, mięzy którymi doszło do kolizji.
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
     if len(aliens) == 0:
         #Pozbycie się isnnijących pocisków i utworzenie nowej floty.
@@ -116,9 +118,6 @@ def create_fleet(ai_settings, screen, ship, aliens):
         for alien_number in range(number_aliens_x):
             create_alien(ai_settings, screen, aliens, alien_number, row_number)
 
-def update_aliens(aliens):
-    """Uaktualnienie położenia wszystkich obcych we flocie."""
-
 def check_fleet_edges(ai_settings, aliens):
     """Odpowiednia reakcja, gdy obcy dotrze do krawędzi ekranu."""
     for alien in aliens.sprites():
@@ -132,10 +131,29 @@ def change_fleet_direction(ai_settings, aliens):
         alien.rect.y += ai_settings.fleet_drop_speed
     ai_settings.fleet_direction *= -1
 
-def update_aliens(ai_settings, aliens):
+def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
+    """Reakcja na uderzenie obcego w statek."""
+    # Zmniejszenie wartości przechowywanej w ships_left.
+    stats.ships_left -= 1
+
+    # Usunięcoe zawartości list aloens i bullets.
+    aliens.empty()
+    bullets.empty()
+
+    #Utworzenie nowej floty i wyświetlenie statku.
+    create_fleet(ai_settings, screen, ship, aliens)
+    ship.center_ship()
+
+    # Pauza
+    sleep(0.5)
+
+def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
     """
     Sprawdzenie, czy flota znajduje sie przy krawędzi ekranu, a następnie
     uaktualnienie położenia wszystkich obcych we flocie.
     """
     check_fleet_edges(ai_settings, aliens)
     aliens.update()
+    # Wykrywanie kolizji między obcymi i statkiem.
+    if pygame.sprite.spritecollideany(ship, aliens):
+        ship_hit(ai_settings, stats, screen, ship, aliens, bullets)

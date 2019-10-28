@@ -49,3 +49,7 @@ class Ship():
     def blitme(self):
         ''' Wyświerlenie statku kosmicznego w jego aktualnym położeniu.'''
         self.screen.blit(self.image, self.rect)
+
+    def center_ship(self):
+        """Umieszczenie statku na środku przy dolnej krawędzi ekranu."""
+        self.center = self.screen_rect.centerx
