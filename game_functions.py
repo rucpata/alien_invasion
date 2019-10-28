@@ -59,7 +59,7 @@ def update_screen(ai_settings, screen, ship, aliens, bullets):
     # Wyświerlenie ostantnio zmodyfikowanego ekranu
     pygame.display.flip()
 
-def update_bullets(aliens, bullets):
+def update_bullets(ai_settings, screen, ship, aliens, bullets):
     ''' Uaktualnienie położenia pocisków i usunięcie tych niweidocznych na ekranie.'''
     # Uaktualnienie położenia pocisków.
     bullets.update()
@@ -72,6 +72,11 @@ def update_bullets(aliens, bullets):
     # Sprawdzanie, czy którykolwiek pocisk trafił obcego.
     # Jeżeli tak, usuwamy zarówno pocisk, jak i obcego.
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
+
+    if len(aliens) == 0:
+        #Pozbycie się isnnijących pocisków i utworzenie nowej floty.
+        bullets.empty()
+        create_fleet(ai_settings, screen, ship, aliens)
 
 def get_number_aliens_x(ai_settings, alien_width):
     """Ustalenie liczby obcych, którzy zmieszczą się w rzędzie."""
