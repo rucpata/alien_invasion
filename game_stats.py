@@ -6,8 +6,8 @@ class GameStats():
         self.ai_settings = ai_settings
         self.reset_stats()
 
-        # Uruchomienie gry w stanie aktywnych
-        self.game_avtive = True
+        # Uruchomienie gry w stanie nieaktywnych
+        self.game_avtive = False
 
     def reset_stats(self):
         """
