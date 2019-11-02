@@ -73,7 +73,7 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens, bul
         create_fleet(ai_settings, screen, ship, aliens)
         ship.center_ship()
 
-def update_screen(ai_settings, screen, stats, ship, aliens, bullets, play_button):
+def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets, play_button):
     ''' Uaktualnienie obrazów na ekranie i przejście do nowego ekranu.'''
     # Odświeżenie ekranu w trakcje każdej iteracji pętli
     screen.fill(ai_settings.bg_color)
@@ -82,6 +82,9 @@ def update_screen(ai_settings, screen, stats, ship, aliens, bullets, play_button
         bullet.draw_bullet()
     ship.blitme()
     aliens.draw(screen)
+
+    #Wyświetlenie informacji o punktacji
+    sb.show_score()
 
     #Wyświetlenie przycisku tylko wtedy, gdy gra jest nieaktywna.
     if not stats.game_active:
