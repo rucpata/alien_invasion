@@ -36,6 +36,9 @@ class Settings():
         # Wartość fleet wynosząca 1 oznacza prawo, natomiast -1 oznacza lewo.
         self.fleet_direction = 1
 
+        # Punktacja
+        self.alien_points = 50
+
     def increase_speed(self):
         """Zmiana ustawień doryczących szybkości."""
         self.ship_speed_factor += self.speedup_scale
