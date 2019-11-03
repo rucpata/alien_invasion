@@ -12,6 +12,7 @@ class GameStats():
         # Najlepsze wyniki nigdy nie powinny zostać wyzerowane
         self.high_score = 0
 
+
     def reset_stats(self):
         """
         Inicjalizacja danych statystycznych, które mogą zmieniać
@@ -19,3 +20,4 @@ class GameStats():
         """
         self.ships_left = self.ai_settings.ship_limit
         self.score = 0
+        self.level = 1
