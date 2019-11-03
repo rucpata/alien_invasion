@@ -114,6 +114,7 @@ def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens,
     if collisions:
         for aliens in collisions.values():
             stats.score += ai_settings.alien_points * len(aliens)
+        check_high_score(stats, sb)
         sb.prep_score()
     if len(aliens) == 0:
         # Usunięcie istniejącuch pocisków, ptzyśpiesenie gry i utworzenie nowej flotu
@@ -216,3 +217,9 @@ def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
 
     #Wyszukiwanie obcych docierających do dolnej krawędzi ekranu.
     check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets)
+
+def check_high_score(stats, sb):
+    """Sprawdzenie, czy mamy nowy najlepszy wynik osiągnięty dotąd w grze."""
+    if stats.score > stats.high_score:
+        stats.high_score = stats.score
+        sb.prep_high_score()

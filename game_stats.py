@@ -9,6 +9,9 @@ class GameStats():
         # Uruchomienie gry w stanie nieaktywnych
         self.game_active = False
 
+        # Najlepsze wyniki nigdy nie powinny zostać wyzerowane
+        self.high_score = 0
+
     def reset_stats(self):
         """
         Inicjalizacja danych statystycznych, które mogą zmieniać
